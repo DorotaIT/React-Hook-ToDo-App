@@ -8,12 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const ItemList = (props) => {
     const {item} = props;
+    console.log("item", item);
 
     return (
        <li className="list-group-item">
            <div className="btn float-left">
                 <FontAwesomeIcon
-                    icon={faCircle}
+                    icon={ item.isDone ? faCheckCircle : faCircle }
                 />
            </div>
 
