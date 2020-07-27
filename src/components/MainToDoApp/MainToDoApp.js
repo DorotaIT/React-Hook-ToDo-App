@@ -25,6 +25,16 @@ export const MainToDoApp = () => {
         setToDos([newToDos, ...toDos]);
     }
 
+    const callbackToggleIsDone = (id) => {
+        const cloneToDos = JSON.parse(JSON.stringify(toDos));
+
+        const searchedIndex = toDos.findIndex((item) => item.id === id);
+
+        const clonedItem = cloneToDos[searchedIndex];
+        cloneToDos[searchedIndex].isDone = !clonedItem.isDone;
+        setToDos(cloneToDos);
+    }
+
     return (
         <div className="container">
             <h2>Lista ToDo</h2>
@@ -32,6 +42,7 @@ export const MainToDoApp = () => {
                 callbackAddToDos={callbackAddToDos}
             />
             <ToDoList
+                callbackToggleIsDone={callbackToggleIsDone}
                 toDos={toDos}
             />
         </div>

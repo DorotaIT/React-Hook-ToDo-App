@@ -8,11 +8,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const ItemList = (props) => {
     const {item} = props;
+    const {callbackToggleIsDone} = props;
     console.log("item", item);
+
+    const handleToggleIsDone = () => {
+        callbackToggleIsDone(item.id);
+    }
 
     return (
        <li className="list-group-item">
-           <div className="btn float-left">
+           <div 
+                className="btn float-left"
+                onClick={handleToggleIsDone}
+           >
                 <FontAwesomeIcon
                     icon={ item.isDone ? faCheckCircle : faCircle }
                 />
