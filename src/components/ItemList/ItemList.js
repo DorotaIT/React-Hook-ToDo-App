@@ -1,5 +1,5 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import './ItemList.css';
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faCircle, faCheckCircle, faEdit } from "@fortawesome/free-regular-svg-icons";
@@ -9,10 +9,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const ItemList = (props) => {
     const {item} = props;
     const {callbackToggleIsDone} = props;
+    const {callbackDeleteItem} = props;
     console.log("item", item);
+    console.log("deleteItem:", callbackDeleteItem);
 
     const handleToggleIsDone = () => {
         callbackToggleIsDone(item.id);
+    }
+
+    const handleDeleteItem = () => {
+        callbackDeleteItem(item.id);
     }
 
     return (
@@ -28,7 +34,10 @@ export const ItemList = (props) => {
 
            {item.title}
 
-            <div className="btn float-right">
+            <div 
+                className="btn float-right"
+                onClick={handleDeleteItem}
+                >
                 <FontAwesomeIcon
                     icon={faTrash}
                 />

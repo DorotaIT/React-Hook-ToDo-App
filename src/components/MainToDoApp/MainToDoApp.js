@@ -4,6 +4,7 @@ import { ItemList } from '../ItemList/ItemList';
 import { ToDoList } from '../ToDoList/ToDoList';
 import { v4 as uuidv4 } from 'uuid';
 import './MainToDoApp.css';
+import { toggleIsDoneStatusById, deleteItem } from '../../utils/main' 
 
 const mockDate = [
  {id: uuidv4(), title: "Nauka Reacta", isDone: true, tags: ["Programming"]},
@@ -26,13 +27,15 @@ export const MainToDoApp = () => {
     }
 
     const callbackToggleIsDone = (id) => {
-        const cloneToDos = JSON.parse(JSON.stringify(toDos));
+        const newToDos = toggleIsDoneStatusById(toDos, id);
 
-        const searchedIndex = toDos.findIndex((item) => item.id === id);
+        setToDos(newToDos);
+    }
 
-        const clonedItem = cloneToDos[searchedIndex];
-        cloneToDos[searchedIndex].isDone = !clonedItem.isDone;
-        setToDos(cloneToDos);
+    const callbackDeleteItem = (id) => {
+        const newToDos = deleteItem(toDos, id);
+
+        setToDos(newToDos);
     }
 
     return (
@@ -43,6 +46,7 @@ export const MainToDoApp = () => {
             />
             <ToDoList
                 callbackToggleIsDone={callbackToggleIsDone}
+                callbackDeleteItem={callbackDeleteItem}
                 toDos={toDos}
             />
         </div>
