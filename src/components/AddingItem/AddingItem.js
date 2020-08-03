@@ -18,6 +18,20 @@ export const AddingItem = (props) => {
         callbackAddToDos(titleInputValue);
     }
 
+    const addItemAfterEnterPress = () => {
+        callbackAddToDos(titleInputValue);
+        setTitleInputValue("");
+    }
+
+    const handleEnterKeyPress = (event) => {
+        console.log("event", event.keyCode);
+        if(event.key === "Enter") { 
+            event.preventDefault();
+            addItemAfterEnterPress();
+            return false; 
+        } 
+    }
+
     return (
         <form className="to-do-form input-group mb-4 mt-5">
             <input
@@ -25,6 +39,8 @@ export const AddingItem = (props) => {
                 type="text"
                 placeholder="Wpisz zadanie..."
                 onChange={handleTitleInput}
+                onKeyPress={handleEnterKeyPress}
+                value={titleInputValue}
              >
             </input>
             <button 
