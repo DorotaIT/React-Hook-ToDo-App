@@ -7,3 +7,9 @@ button:focus{
     border-color: #495057;
     box-shadow: none;
 }
+
+.alert {
+    display:flex;
+    margin-left: 15px;
+    max-width: 97.4%;
+}

@@ -15,16 +15,24 @@ export const AddingItem = (props) => {
     }
 
     const handleAddTask = () => {
+        if(titleInputValue === "") {
+            console.log("error");
+        } else {
         callbackAddToDos(titleInputValue);
+        setTitleInputValue("");
+        }
     }
 
     const addItemAfterEnterPress = () => {
+        if (titleInputValue !== '') {
         callbackAddToDos(titleInputValue);
         setTitleInputValue("");
+    } else {
+        console.log("error");
+    }
     }
 
     const handleEnterKeyPress = (event) => {
-        console.log("event", event.keyCode);
         if(event.key === "Enter") { 
             event.preventDefault();
             addItemAfterEnterPress();
@@ -33,24 +41,42 @@ export const AddingItem = (props) => {
     }
 
     return (
-        <form className="to-do-form input-group mb-4 mt-5">
-            <input
-                className="form-control" 
-                type="text"
-                placeholder="Wpisz zadanie..."
-                onChange={handleTitleInput}
-                onKeyPress={handleEnterKeyPress}
-                value={titleInputValue}
-             >
-            </input>
-            <button 
-                className="btn btn-outline-secondary" 
-                type="button"
-                onClick={handleAddTask}
-                >
-                Dodaj
-            </button>
-        </form>
+        <>
+            <form className="to-do-form input-group container mb-4 mt-5 container-fluid">
+                <div className="row w-100">
+                    <input
+                        className="form-control col-md-5" 
+                        type="text"
+                        placeholder="Wpisz zadanie..."
+                        onChange={handleTitleInput}
+                        onKeyPress={handleEnterKeyPress}
+                        value={titleInputValue}
+                    >
+                    </input>
+                    <div class="form-group col-md-5">
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>Wybierz tag...</option>
+                            <option>Zakupy</option>
+                            <option>Programowanie</option>
+                            <option>Zwierzęta</option>
+                            <option>Prace domowe</option>
+                        </select>
+                    </div>
+                    <button 
+                        className="btn btn-outline-secondary btn-block col-md-2" 
+                        type="button"
+                        onClick={handleAddTask}
+                        >
+                        Dodaj
+                    </button>    
+                </div> 
+            </form>
+                <div className="row">
+                    <div className="alert alert-danger w-100 p-3" role="alert">
+                        Uzupełnij dane!
+                    </div>
+                </div>
+        </>
     )
 
 };
