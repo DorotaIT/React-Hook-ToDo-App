@@ -10,8 +10,6 @@ export const ItemList = (props) => {
     const {item} = props;
     const {callbackToggleIsDone} = props;
     const {callbackDeleteItem} = props;
-    console.log("item", item);
-    console.log("deleteItem:", callbackDeleteItem);
 
     const handleToggleIsDone = () => {
         callbackToggleIsDone(item.id);
@@ -19,6 +17,18 @@ export const ItemList = (props) => {
 
     const handleDeleteItem = () => {
         callbackDeleteItem(item.id);
+    }
+
+    const renderTags = () => {
+        return item.tags.map ( (tag) => (
+            <div>
+                {tag}
+            </div>
+        ))
+    }
+
+    const getTagName = () => {
+        
     }
 
     return (
@@ -33,6 +43,7 @@ export const ItemList = (props) => {
            </div>
 
            {item.title}
+           {renderTags()}
 
             <div 
                 className="btn float-right"

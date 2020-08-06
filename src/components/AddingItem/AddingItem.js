@@ -2,40 +2,52 @@ import React, {useState} from 'react';
 // import { v4 as uuidv4 } from 'uuid';
 import './AddingItem.css';
 
+const defaultTags = [
+    { name: "Zwierzęta", value: "ANIMALS" },
+    { name: "Programowanie", value: "PROGRAMMING" },
+    { name: "Prace domowe", value: "HOMEWORK" },
+    { name: "Zakupy", value: "SHOPPING" }
+]
+
 export const AddingItem = (props) => {
     const [titleInputValue, setTitleInputValue] = useState('');
+    const [isValid, setIsValid] = useState();
+    const [tagValue, setTagValue] = useState('');
     const {callbackAddToDos} = props;
-    
-    console.log("value", titleInputValue)
 
     const handleTitleInput = (event) => {
         const value = event.target.value;
-        console.log(value)
+        checkValidation(value);
         setTitleInputValue(value);
     }
 
-    const handleAddTask = () => {
-        if(titleInputValue === "") {
-            console.log("error");
-        } else {
-        callbackAddToDos(titleInputValue);
-        setTitleInputValue("");
-        }
+    const checkValidation = (inputValue = titleInputValue) => {
+       if(inputValue === "") {
+           setIsValid(false);
+       } else {
+           setIsValid(true);
+       }
     }
 
-    const addItemAfterEnterPress = () => {
-        if (titleInputValue !== '') {
-        callbackAddToDos(titleInputValue);
-        setTitleInputValue("");
-    } else {
-        console.log("error");
+    const handleChooseTag = (event) => {
+        console.log("eventTarget", event.target.value);
+        const value = event.target.value;
+        setTagValue(value);
     }
+
+    const addItem = () => {
+        callbackAddToDos(titleInputValue, tagValue);
+        setTitleInputValue("");
+        setTagValue("");
+        setIsValid(false);
     }
 
     const handleEnterKeyPress = (event) => {
         if(event.key === "Enter") { 
             event.preventDefault();
-            addItemAfterEnterPress();
+            if(isValid) {
+                addItem(); 
+            }
             return false; 
         } 
     }
@@ -53,29 +65,28 @@ export const AddingItem = (props) => {
                         value={titleInputValue}
                     >
                     </input>
-                    <div class="form-group col-md-5">
-                        <select class="form-control" id="exampleFormControlSelect1">
+                    <div className="form-group col-md-5">
+                        <select 
+                            class="form-control" 
+                            id="exampleFormControlSelect1"
+                            onChange={handleChooseTag}
+                            >
                             <option>Wybierz tag...</option>
-                            <option>Zakupy</option>
-                            <option>Programowanie</option>
-                            <option>Zwierzęta</option>
-                            <option>Prace domowe</option>
+                            {defaultTags.map ( (tag) => (
+                                <option value={tag.value}>{tag.name}</option>
+                            ))}
                         </select>
                     </div>
                     <button 
                         className="btn btn-outline-secondary btn-block col-md-2" 
                         type="button"
-                        onClick={handleAddTask}
+                        disabled={ !isValid }
+                        onClick={addItem}
                         >
                         Dodaj
                     </button>    
                 </div> 
             </form>
-                <div className="row">
-                    <div className="alert alert-danger w-100 p-3" role="alert">
-                        Uzupełnij dane!
-                    </div>
-                </div>
         </>
     )
 

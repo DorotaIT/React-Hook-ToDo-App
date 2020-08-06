@@ -6,20 +6,20 @@ import './MainToDoApp.css';
 import { toggleIsDoneStatusById, deleteItem } from '../../utils/main' 
 
 const mockDate = [
- {id: uuidv4(), title: "Nauka Reacta", isDone: false, tags: ["Programming"]},
- {id: uuidv4(), title: "Zrobić fajny projekt z hookami", isDone: false, tags: ["Programming"]},
+ {id: uuidv4(), title: "Nauka Reacta", isDone: false, tags: []},
+ {id: uuidv4(), title: "Zrobić fajny projekt z hookami", isDone: false, tags: []},
  {id: uuidv4(), title: "Mycie naczyń", isDone: false, tags: []}
 ]
 
 export const MainToDoApp = () => {
     const [toDos, setToDos] = useState(mockDate);
 
-    const callbackAddToDos = (title) => {
+    const callbackAddToDos = (title, tags) => {
         const newToDos = {
             id: uuidv4(),
             title,
             isDone: false,
-            tags: []
+            tags: [tags]
         }
 
         setToDos([newToDos, ...toDos]);
