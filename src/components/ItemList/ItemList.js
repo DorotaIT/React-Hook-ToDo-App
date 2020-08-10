@@ -1,10 +1,9 @@
 import React from 'react';
-// import { v4 as uuidv4 } from 'uuid';
 import './ItemList.css';
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faCircle, faCheckCircle, faEdit } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { defaultTags } from '../../data/tags';
 
 export const ItemList = (props) => {
     const {item} = props;
@@ -22,13 +21,16 @@ export const ItemList = (props) => {
     const renderTags = () => {
         return item.tags.map ( (tag) => (
             <div>
-                {tag}
+                {getTagName(tag)}
             </div>
         ))
     }
 
-    const getTagName = () => {
+    const getTagName = (tagKey) => {
+        console.log("tagkey", tagKey);
         
+        
+        const searchedNameTag = defaultTags.findIndex(() => === );
     }
 
     return (

@@ -1,13 +1,6 @@
 import React, {useState} from 'react';
-// import { v4 as uuidv4 } from 'uuid';
+import { defaultTags } from '../../data/tags';
 import './AddingItem.css';
-
-const defaultTags = [
-    { name: "Zwierzęta", value: "ANIMALS" },
-    { name: "Programowanie", value: "PROGRAMMING" },
-    { name: "Prace domowe", value: "HOMEWORK" },
-    { name: "Zakupy", value: "SHOPPING" }
-]
 
 export const AddingItem = (props) => {
     const [titleInputValue, setTitleInputValue] = useState('');
@@ -67,7 +60,7 @@ export const AddingItem = (props) => {
                     </input>
                     <div className="form-group col-md-5">
                         <select 
-                            class="form-control" 
+                            className="form-control" 
                             id="exampleFormControlSelect1"
                             onChange={handleChooseTag}
                             >
